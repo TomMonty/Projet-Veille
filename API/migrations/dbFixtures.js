@@ -1,27 +1,32 @@
 let mysql = require("mysql");
 const { dbConfig } = require("../config.json");
 
-let con = mysql.createConnection({
-    host: dbConfig.host,
-    user: dbConfig.user,
-    password: dbConfig.password,
-    database: dbConfig.database,
-});
-
-con.connect(function (err) {
-    if (err) throw err;
-    console.log(`Connected to Mysql ${dbConfig.database}`);
-
-    const sql = "INSERT INTO veille (amandes, quantity) VALUES ?";
-    const values = [
-        ["Plein", 200],
-        ["Partout", 199],
-        ["Nope", 20],
-        ["Là", 2],
-        ["Peut être", 666],
-    ];
-    con.query(sql, [values], function (err, result) {
-        if (err) throw err;
-        console.log("Successfully inserted : " + result.affectedRows);
+async function dbFixtures() {
+    let con = mysql.createConnection({
+        host: dbConfig.host,
+        user: dbConfig.user,
+        password: dbConfig.password,
+        database: dbConfig.database,
     });
-});
+
+    con.connect(function (err) {
+        if (err) throw err;
+        console.log("Connected to MySQL!");
+
+        const insertData = `
+            INSERT INTO links (titres, url, description) VALUES 
+            ('Développement Web', 'https://developer.mozilla.org', 'Ressources pour développeurs web'),
+            ('Veille Technologique', 'https://techcrunch.com', 'Actualités technologiques'),
+            ('Actualités Générales', 'https://www.bbc.com', 'Actualités internationales')
+        `;
+
+        con.query(insertData, (err, results) => {
+            if (err) throw err;
+            console.log("Links inserted or already exist.");
+        });
+
+        con.end();
+    });
+}
+
+module.exports = dbFixtures;

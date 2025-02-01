@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille Extension</title>
 </head>
 
 <body>
+    <h1>Ajouter un lien de veille</h1>
     <form id="linkForm">
         <input type="url" id="linkInput" placeholder="Lien de la page" required />
         <textarea id="descriptionInput" placeholder="Description" required></textarea>
+
+        <label for="titleSelect">Choisir un titre :</label>
         <select id="titleSelect"></select>
-        <input type="text" id="newTitleInput" placeholder="Nouveau titre" />
+
+        <input type="text" id="newTitleInput" placeholder="Ou entrez un nouveau titre" />
+
         <button type="submit">Envoyer</button>
     </form>
 

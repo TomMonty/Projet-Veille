@@ -32,6 +32,7 @@ const client = new Client({
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
+        GatewayIntentBits.DirectMessages,
     ],
 });
 
@@ -76,6 +77,8 @@ for (const file of eventFiles) {
         client.on(event.name, (...args) => event.execute(...args));
     }
 }
+
+
 
 // Connexion du bot
 client.once(Events.ClientReady, (readyClient) => {
