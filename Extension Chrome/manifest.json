@@ -1,0 +1,28 @@
+{
+    "manifest_version": 3,
+    "name": "Veille de bot",
+    "description": "bot pour veiller qui bot",
+    "version": "1.0",
+    "action": {
+        "default_popup": "veille.html",
+        "default_icon": "shrek.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.instagram.com/*"
+            ],
+            "css": [
+                "veille.css"
+            ],
+            "js": [
+                "veille.js"
+            ],
+            "all_frames": false,
+            "match_origin_as_fallback": false,
+            "match_about_blank": false,
+            "run_at": "document_idle",
+            "world": "ISOLATED"
+        }
+    ]
+}
